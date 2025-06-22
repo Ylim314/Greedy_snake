@@ -1,0 +1,24 @@
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CMakeLists.txt.user
+CMakeOutput.log
+CMakeTmp/
+*.cmake.in
+MakeFile
+# Build artifacts
+build/
+Build/
+build-*/
+Build-*/
+*.exe
+*.dll
+*.so
+*.lib
+*.a
+# VS Code
+.vscode/
+# Operating System files
+.DS_Store
+Thumbs.db
