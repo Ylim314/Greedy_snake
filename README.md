@@ -1,125 +1,90 @@
-# 🐍 Greedy Snake Game
+# Greedy Snake
 
-一个基于 C 语言和 PDCurses 库开发的经典贪吃蛇游戏，作为数据结构课程设计项目。
+A terminal-based Snake game written in C with PDCurses. This project was built as a data structures course project and kept public as a small, complete systems-style program that demonstrates game loop design, state management, and array-based movement logic.
 
-## ✨ 特性
+## Demo
 
-- 🎮 经典贪吃蛇玩法
-- 🎨 彩色终端界面
-- ⚡ 三种难度模式（简单/中等/困难）
-- 🌐 支持中文界面
-- 🔄 穿墙模式
-- ⏱️ 实时计时和计分
-- 🎯 流畅的游戏体验
+- Gameplay video: [videos/screen_record.mp4](videos/screen_record.mp4)
 
-## 🚀 快速开始
+## Highlights
 
-### 环境要求
+- Built in C with a lightweight terminal UI
+- Menu system, pause flow, about page, and mode selection
+- Three speed modes: slow, medium, fast
+- Score tracking and elapsed time display
+- Wrap-around wall behavior
+- Random food generation that avoids the snake body
+- Cross-platform build path: bundled PDCurses for Windows, curses via CMake on Unix-like systems
 
-- Windows 10/11
-- MSYS2 或 MinGW-w64
-- PDCurses 库
+## Data Structure And Logic
 
-### 安装步骤
+This repository is worth showing publicly because the implementation is small but explicit:
 
-1. **克隆项目**
+- The snake body is stored in a fixed-size array of `Point` nodes
+- Movement is handled by shifting body segments forward each frame
+- Direction updates prevent immediate reversal into the snake body
+- Food generation retries until it lands outside occupied cells
+- Game state is modeled with an enum-based state machine: menu, playing, paused, game over, about, and mode selection
 
-```bash
-git clone https://github.com/Ylim314/Greedy_snake.git
-cd Greedy_snake
-```
+## Tech Stack
 
-2. **安装依赖**
+- C99
+- PDCurses
+- CMake
 
-```bash
-# 使用MSYS2
-pacman -S mingw-w64-x86_64-gcc
-pacman -S mingw-w64-x86_64-pdcurses
+## Build
 
-# 或使用MinGW-w64
-# 下载并配置PDCurses库
-```
+### Windows
 
-3. **编译运行**
+This repository vendors `PDCurses`, so the simplest path is to use CMake:
 
 ```bash
-gcc -o snake.exe src/*.c -lpdcurses
-./snake.exe
+cmake -S . -B build
+cmake --build build --config Release
 ```
 
-## 🎮 游戏控制
+### Unix-like Systems
 
-- **方向键**：控制蛇的移动
-- **P 键**：暂停/继续游戏
-- **ESC 键**：返回主菜单
-- **回车键**：确认选择
+Install a curses implementation first, then build with CMake:
 
-## 🏗️ 项目结构
-
-```
-src/
-├── main.c          # 主程序入口
-├── game.h/c        # 游戏核心逻辑
-├── snake.h/c       # 蛇的数据结构和操作
-├── food.h/c        # 食物生成逻辑
-├── ui.h/c          # 用户界面显示
-└── input.h/c       # 输入处理
+```bash
+cmake -S . -B build
+cmake --build build
 ```
 
-## 🔧 数据结构设计
+## Run
 
-- **蛇身**：使用数组实现，支持 O(1)移动操作
-- **游戏状态**：枚举类型管理不同游戏状态
-- **坐标系统**：Point 结构体表示位置信息
+```bash
+./build/GreedySnake
+```
 
-## 🤝 贡献指南
+On Windows with a multi-config generator, the executable may be under `build/Release/GreedySnake.exe`.
 
-我们欢迎所有形式的贡献！
+## Controls
 
-### 如何贡献
+- Arrow keys: move
+- `P`: pause / resume
+- `ESC` or `Q`: return to menu
+- `Enter`: confirm menu selection
 
-1. Fork 这个项目
-2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交你的更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开一个 Pull Request
+## Project Structure
 
-### 贡献方向
+- `src/main.c`: entry point and main loop
+- `src/game.c`: game state updates, scoring, speed, wall handling
+- `src/snake.c`: snake movement and self-collision logic
+- `src/food.c`: food placement
+- `src/input.c`: keyboard handling and menu interaction
+- `src/ui.c`: terminal rendering
 
-- 🎨 界面优化和美化
-- 🎵 添加音效支持
-- 🗺️ 新游戏模式
-- 📱 跨平台支持
-- 🐛 Bug 修复
-- 📚 文档完善
+## Why This Repo Is Public
 
-## 📝 开发计划
+This is not just a classroom archive. It is a compact C project that shows:
 
-- [ ] 添加图形化界面（SDL/SFML）
-- [ ] 实现游戏存档功能
-- [ ] 添加网络对战模式
-- [ ] 支持自定义地图
-- [ ] 添加音效和背景音乐
-- [ ] 移动端适配
+- basic data structure implementation
+- terminal UI programming
+- state machine design
+- clean separation between input, game logic, and rendering
 
-## 📄 许可证
+## License
 
-本项目采用 MIT 许可证
-
-## 👨‍💻 作者
-
-**Ylim314** - 数据结构课程设计项目
-
-## 🙏 致谢
-
-- PDCurses 库提供终端图形支持
-- 感谢所有贡献者的支持和建议
-
-## 📞 联系方式
-
-- GitHub: [@Ylim314](https://github.com/Ylim314)
-- 项目链接: [https://github.com/Ylim314/Greedy_snake](https://github.com/Ylim314/Greedy_snake)
-
----
-
-⭐ 如果这个项目对你有帮助，请给它一个星标！
+MIT
